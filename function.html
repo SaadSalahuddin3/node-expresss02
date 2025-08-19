@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Concepts Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { margin: 5px; padding: 10px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Core Concepts Demo</h1>
+
+  <button onclick="demoBlockScope()">Block Scope</button>
+  <button onclick="demoFunctionScope()">Function Scope</button>
+  <button onclick="demoHigherOrderFunction()">Higher-Order Function</button>
+  <button onclick="demoCallback()">Callback</button>
+  <button onclick="demoRecursive()">Recursive Function</button>
+  <button onclick="demoFunctionExpression()">Function Assigned to Variable</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. Block Scope
+    function demoBlockScope() {
+      output.textContent = "";
+      {
+        let a = 10;
+        const b = 20;
+        output.textContent += `Inside block: a = ${a}, b = ${b}\n`;
+      }
+      output.textContent += "Outside block: a and b are not accessible\n";
+    }
+
+    // 2. Function Scope
+    function demoFunctionScope() {
+      output.textContent = "";
+      function scopeTest() {
+        var x = 100;
+        output.textContent += `Inside function: x = ${x}\n`;
+      }
+      scopeTest();
+      output.textContent += "Outside function: x is not accessible\n";
+    }
+
+    // 3. Higher-Order Function
+    function demoHigherOrderFunction() {
+      output.textContent = "";
+
+      function double(n) {
+        return n * 2;
+      }
+
+      function higherOrder(func, value) {
+        return func(value);
+      }
+
+      const result = higherOrder(double, 5);
+      output.textContent += `Result of higher-order function: ${result}\n`;
+    }
+
+    // 4. Callback
+    function demoCallback() {
+      output.textContent = "";
+
+      function greet(name) {
+        output.textContent += `Hello, ${name}\n`;
+      }
+
+      function processUserInput(callback) {
+        const userName = "Alice";
+        callback(userName);
+      }
+
+      processUserInput(greet);
+    }
+
+    // 5. Recursive Function
+    function demoRecursive() {
+      output.textContent = "";
+
+      function countdown(n) {
+        if (n < 0) return;
+        output.textContent += `${n}\n`;
+        countdown(n - 1);
+      }
+
+      countdown(3);
+    }
+
+    // 6. Function Assigned to Variable
+    function demoFunctionExpression() {
+      output.textContent = "";
+
+      const sayHi = function(name) {
+        output.textContent += `Hi, ${name}\n`;
+      };
+
+      const sayBye = (name) => {
+        output.textContent += `Bye, ${name}\n`;
+      };
+
+      sayHi("Bob");
+      sayBye("Bob");
+    }
+  </script>
+</body>
+</html>
